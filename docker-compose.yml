@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "myproject"
+    restart: unless-stopped
+  django:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    volumes:
+      - ./myproject:/code/myproject
+    command: python ./manage.py runserver 0:8000
+    restart: unless-stopped

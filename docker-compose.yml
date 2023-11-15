@@ -14,11 +14,11 @@ services:
   django:
     build: .
     ports:
-      - "8000:8000"
+      - "8007:8007"
     depends_on:
       db:
         condition: service_healthy
     volumes:
       - ./paste_bin:/code/paste_bin
-    command: python ./manage.py runserver 0:8000
+    command: python ./manage.py runserver 0:8007
     restart: unless-stopped

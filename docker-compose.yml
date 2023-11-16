@@ -6,14 +6,19 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: "root"
       MYSQL_DATABASE: "paste_bin"
+    healthcheck:
+      test: ["CMD", 'mysqladmin', 'ping', '-h', 'localhost', '-u', 'root', '-p$$MYSQL_ROOT_PASSWORD']
+      interval: 1s
+      timeout: 1s
     restart: unless-stopped
   django:
     build: .
     ports:
-      - "8000:8000"
+      - "8007:8007"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     volumes:
       - ./paste_bin:/code/paste_bin
-    command: python ./manage.py runserver 0:8000
+    command: python ./manage.py runserver 0:8007
     restart: unless-stopped

@@ -7,7 +7,7 @@ services:
       MYSQL_ROOT_PASSWORD: "root"
       MYSQL_DATABASE: "paste_bin"
     healthcheck:
-      test: ["CMD", 'mysqladmin', 'ping', '-h', 'localhost', '-u', 'root', '-p$$MYSQL_ROOT_PASSWORD']
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$$MYSQL_ROOT_PASSWORD"]
       interval: 1s
       timeout: 1s
     restart: unless-stopped
@@ -21,4 +21,8 @@ services:
     volumes:
       - ./paste_bin:/code/paste_bin
     command: python ./manage.py runserver 0:8007
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8007/"]
+      interval: 10s
+      timeout: 1s
     restart: unless-stopped

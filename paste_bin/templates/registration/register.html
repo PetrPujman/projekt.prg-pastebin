@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<body bgcolor="pink">
+    <h1>{% block title %}Registrace{% endblock %}</h1>
+
+    <form method="post" action=".">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Potvrdit">
+    </form>
+</body>
+
+{% endblock %}

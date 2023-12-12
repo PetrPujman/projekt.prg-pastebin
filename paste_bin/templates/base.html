@@ -8,12 +8,16 @@
     <body>
         <nav>
             <ul>
-                <li><a href="{% url "index" %}">Titulní strana</a> </li>
+                <li><a href="{% url "index" %}">Titulní strana</a></li>
                 {% if user.is_authenticated %}
-                    <li><a href="{% url "password_change" %}">Změna hesla</a> </li>
-                    <li><a href="{% url "logout" %}">Odhlášení</a> </li>
+                    {% if user.is_staff %}
+                        <li><a href="{% url "admin:index" %}">Administrace</a></li>
+                    {% endif %}
+                    <li><a href="{% url "password_change" %}">Změna hesla</a></li>
+                    <li><a href="{% url "logout" %}">Odhlášení</a></li>
                 {% else %}
-                    <li><a href="{% url "login" %}">Přihlášení</a> </li>
+                    <li><a href="{% url "registration" %}">Registrace</a></li>
+                    <li><a href="{% url "login" %}">Přihlášení</a></li>
                 {% endif %}
             </ul>
         </nav>

@@ -3,15 +3,11 @@ on: [push, pull_request]
 jobs:
   coverage:
     runs-on: ubuntu-latest
-    services:
-      db:
-        image: mysql:8.0
-        env:
-          MYSQL_ROOT_PASSWORD: root
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
+    env:
+      DB_HOST: 127.0.0.1
     steps:
+    - name: Run MySQL
+      run: sudo systemctl start mysql.service
     - uses: actions/checkout@v4
       with:
         fetch-depth: 0

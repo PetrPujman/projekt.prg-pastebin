@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/stable/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/stable/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -80,7 +80,7 @@ DATABASES = {
         "NAME": "paste_bin",
         "USER": "root",
         "PASSWORD": "root",
-        "HOST": "db",
+        "HOST": os.environ.setdefault("DB_HOST", "db"),
         "PORT": "3306",
         "OPTIONS": {
             "init_command": "SET sql_mode='STRICT_TRANS_TABLES'",

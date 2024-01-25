@@ -1,5 +1,60 @@
-body {
+* {
     font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
     max-width: 1000px;
     margin: 0 auto;
+}
+
+table th {
+    text-align: left;
+    vertical-align: top;
+}
+
+.errorlist {
+    padding: 0;
+}
+
+.errorlist li {
+    list-style: none;
+    color: red;
+}
+
+.helptext {
+    font-size: small;
+}
+
+main {
+    margin: 50px 0 0 200px;
+}
+
+nav {
+    float: left;
+}
+
+nav ul {
+    padding: 0;
+}
+
+nav ul>li {
+    list-style: none;
+}
+
+nav ul>li>a {
+    color: blue;
+}
+
+#logout {
+    display: inline;
+    border: none;
+    background: none;
+    padding: 0;
+    font-size: inherit;
+    text-decoration: underline;
+    color: blue;
+}
+
+#logout:hover {
+    cursor: pointer;
 }

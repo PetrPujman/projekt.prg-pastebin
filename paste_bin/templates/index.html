@@ -3,19 +3,22 @@
 {% block content %}
 
 
-<head>
-    <h1>{% block title %}PASTEBIN{% endblock %}</h1>
-    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/35/Pastebin.com_logo.png/225px-Pastebin.com_logo.png" width="10%" height="10%" />
-        <hr>
-    <a href="https://p7.err.cz/accounts/login/">LOGIN</a>
-    <a href="https://p7.err.cz/account/registration/">REGISTER</a>
-        <hr>
-</head>
-<body bgcolor="pink">
-    <p>uwu</p>
-    <p>owo</p>
-</body>
 
+    <h1>{% block title %}PASTEBIN{% endblock %}</h1>
+        {% if user.is_authenticated %}
+        <ul>
+            {% for my_model in contents %}
+                <li>{{ my_model }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/35/Pastebin.com_logo.png/225px-Pastebin.com_logo.png" width="10%" height="10%" />
+                <hr>
+            <a href="https://p7.err.cz/accounts/login/">LOGIN</a>
+            <a href="https://p7.err.cz/account/registration/">REGISTER</a>
+                <hr>
+
+    {% endif %}
 {% endblock %}
 
 

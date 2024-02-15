@@ -4,15 +4,22 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>{% block title %}{% endblock %}</title>
         <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/pygments.css' %}">
+
+    
+
     </head>
     <body>
         <nav>
             <ul>
-                <li><a href="{% url "index" %}">Titulní strana</a></li>
+                <div class="navbar">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/35/Pastebin.com_logo.png/225px-Pastebin.com_logo.png" width="55" height="55" />
+                    <h1>PASTEBIN</h1>
+                    <li><a href="{% url "index" %}">Titulní strana</a></li>
                 {% if user.is_authenticated %}
-                    {% if user.is_staff %}
-                        <li><a href="{% url "admin:index" %}">Administrace</a></li>
-                    {% endif %}
+                {% if user.is_staff %}
+                    <li><a href="{% url "admin:index" %}">Administrace</a></li>
+                {% endif %}
                     <li><a href="{% url "add_item" %}">Přidat paste</a></li>
                     <li><a href="{% url "password_change" %}">Změna hesla</a></li>
                     <li><a href="{% url "logout" %}">Odhlášení</a></li>
@@ -20,6 +27,7 @@
                     <li><a href="{% url "registration" %}">Registrace</a></li>
                     <li><a href="{% url "login" %}">Přihlášení</a></li>
                 {% endif %}
+                </div>
             </ul>
         </nav>
         <main>

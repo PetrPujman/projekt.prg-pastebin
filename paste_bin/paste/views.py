@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .forms import ContentForm
@@ -27,7 +27,6 @@ def registration(request):
 def add_item(request):
 	if request.method == "POST":
 		form = ContentForm(request.POST)
-
 		if form.is_valid():
 			instance = form.save(commit=False)
 			instance.user = request.user
@@ -38,3 +37,18 @@ def add_item(request):
 		form = ContentForm()
 
 	return render(request, "add_item.html", {"form": form})
+
+
+def display_content(request, slug):
+	content = get_object_or_404(Content, slug=slug)
+	return render(request, "display_content.html", {"content": content})
+
+
+def remove_item(request, content_id):
+	content = get_object_or_404(Content, id=content_id, user_id=request.user.id)
+	content.delete()
+	messages.add_message(request, messages.INFO, "paste byl odstraněn.")
+	return redirect("index")
+
+
+

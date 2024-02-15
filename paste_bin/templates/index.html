@@ -1,25 +1,30 @@
 {% extends "base.html" %}
 
+
+{% block title %}PASTEBIN{% endblock %}
+
 {% block content %}
 
 
 
-    <h1>{% block title %}PASTEBIN{% endblock %}</h1>
+
         {% if user.is_authenticated %}
+        <h2>Vaše pasty</h2  >
         <ul>
-            {% for my_model in contents %}
-                <li>{{ my_model }}</li>
+            {% for content in contents %}
+                <li><a href="{% url "display_content" content.slug %}">{{ content }}</a> <a onclick = "return confirm('Opravdu chcete smazat?');"
+                                                                                            align="right" href="{% url "remove_item" content.id %}">
+                    <img src="https://cdn.pixabay.com/photo/2013/07/13/12/32/forbidden-159816_1280.png" width="15" height="15" /></a></li>
             {% endfor %}
         </ul>
         {% else %}
-            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/35/Pastebin.com_logo.png/225px-Pastebin.com_logo.png" width="10%" height="10%" />
-                <hr>
-            <a href="https://p7.err.cz/accounts/login/">LOGIN</a>
-            <a href="https://p7.err.cz/account/registration/">REGISTER</a>
-                <hr>
+       
+
 
     {% endif %}
 {% endblock %}
+
+<script src="script.js"></script>
 
 
 
